@@ -4,6 +4,7 @@ import com.carrental.demo.model.Account;
 import org.springframework.ui.Model;
 
 public interface AccountService {
-    void addAccount(Account account);
     boolean checkLogin(String email, String password, Model model);
+    boolean checkRegister(String name, String email, String password, String confirmPassword, String phone,
+			String address, String tax_code, Model model);
 }

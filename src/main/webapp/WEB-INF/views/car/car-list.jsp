@@ -37,6 +37,7 @@
 											<th>Số km</th>	
 											<th>Ảnh</th>
 											<th>Thông tin</th>
+											<th>Trạng thái</th>
 											<th>Detail</th>
 										</thead>
 										<tbody>
@@ -61,6 +62,7 @@
 												" />
 													</td>
 														<td>${car.basic_infor}</td>
+														<td>${car.status}</td>
 														<td><a href="${pageContext.request.contextPath}/edit-car/${car.id}">Edit</a></td>
 												</tr>
 											</c:forEach>

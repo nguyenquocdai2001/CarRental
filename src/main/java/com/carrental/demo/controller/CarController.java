@@ -22,11 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.carrental.demo.model.Account;
 import com.carrental.demo.model.Car;
 import com.carrental.demo.repository.CarRepository;
+import com.carrental.demo.service.CarService;
 
 import org.springframework.ui.Model;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
@@ -34,12 +37,23 @@ public class CarController {
 	@Autowired
 	private CarRepository carRepository;
 	
+	
+	
 	@Autowired
 	private ServletContext servletContext;
 	
 	@GetMapping("add-car")
-    public String addCarForm(){
-        return "./car/add-car";
+    public String addCarForm(Model model, HttpSession session){
+		if (session.getAttribute("userSession") != null) {
+			Account loggedInUser = (Account) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				return "./car/add-car";
+				
+			} else {
+				return "redirect:/clientpage";
+			}
+		}
+		return "./login";
     }
 	
 	@PostMapping("add-car-post")
@@ -53,14 +67,21 @@ public class CarController {
 	}
 	
 	@GetMapping("/edit-car/{id}")
-	public ModelAndView showEditForm(@PathVariable("id") String idCar, Model model) {
-		Optional<Car> car = carRepository.findById(idCar);
-		
-		// Đưa xe vào model để hiển thị trong biểu mẫu
-		model.addAttribute("car", car.get());
-		
-		ModelAndView mav = new ModelAndView("./car/edit-car");	
-		return mav;
+	public String showEditForm(@PathVariable("id") String idCar, Model model, HttpSession session) {
+		if (session.getAttribute("userSession") != null) {
+			Account loggedInUser = (Account) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				Optional<Car> car = carRepository.findById(idCar);
+				
+				// Đưa xe vào model để hiển thị trong biểu mẫu
+				model.addAttribute("car", car.get());	
+				return "./car/edit-car";
+				
+			} else {
+				return "redirect:/clientpage";
+			}
+		}
+		return "./login";
 	}
 	
 	@PostMapping("/edit-car/{id}/edit")
@@ -78,14 +99,30 @@ public class CarController {
 	}
 	
 	@RequestMapping(value = "/list-car", method = RequestMethod.GET)
-	public ModelAndView productPage(ModelMap modelmap) {
-		List<Car> listCar = new ArrayList<Car>();
-		listCar = carRepository.findAll();
+	public String listCar(Model model, HttpSession session) {
+		if (session.getAttribute("userSession") != null) {
+			Account loggedInUser = (Account) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				List<Car> listCar = new ArrayList<Car>();
+				listCar = carRepository.findAll();
 
-		modelmap.addAttribute("listCar", listCar);
-		ModelAndView mav = new ModelAndView("car/car-list");
-		return mav;
+				model.addAttribute("listCar", listCar);
+				return "car/car-list";
+				
+			} else {
+				return "redirect:/clientpage";
+			}
+		}
+		return "./login";	
 	}
+	
+	/*
+	 * @PostMapping("/change-status-car/{id}/change") public String
+	 * changeStatusCarById(@ModelAttribute("car") Car car) {
+	 * 
+	 * carService.changeStatusCarById(car.getId(), car.s) return
+	 * "redirect:/list-car"; }
+	 */
 	
 	private String saveImageInProject(MultipartFile file) {
 		// Lưu file vào thư mục trong project

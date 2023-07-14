@@ -31,15 +31,16 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên</label> <input type="text" class="form-control" value="${car.name}"
-												placeholder="Nhập tên xe"  name="name" required> 
+											<label>Tên xe</label> <input type="text" class="form-control"
+												value="${car.name}" placeholder="Nhập tên xe" name="name"
+												required>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
 											<label>Biển số</label> <input type="text"
-												class="form-control" placeholder="Nhập biển số" value="${car.license_plate}"
-												name="license_plate" required>
+												class="form-control" placeholder="Nhập biển số"
+												value="${car.license_plate}" name="license_plate" required>
 										</div>
 									</div>
 								</div>
@@ -47,15 +48,16 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Loại xe</label> <input type="text"
-												class="form-control" placeholder="Nhập loại xe" value="${car.brand}"
-												name="brand" required>
+												class="form-control" placeholder="Nhập loại xe"
+												value="${car.brand}" name="brand" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Số ghế</label> <input type="number"
-												class="form-control" placeholder="Nhập số ghế" value="${car.number_of_seats}"
-												name="number_of_seats" required>
+												class="form-control" placeholder="Nhập số ghế"
+												value="${car.number_of_seats}" name="number_of_seats"
+												required>
 										</div>
 									</div>
 								</div>
@@ -63,8 +65,8 @@
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
 											<label>Số km đã đi</label> <input type="number"
-												class="form-control" placeholder="Nhập số km" value="${car.kilometer}"
-												name="kilometer" required>
+												class="form-control" placeholder="Nhập số km"
+												value="${car.kilometer}" name="kilometer" required>
 										</div>
 									</div>
 									<div class="col-md-4 px-1">
@@ -79,11 +81,22 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-12 pr-1">
+									<div class="col-md-6 pr-1">
 										<div class="form-group">
 											<label>Thông tin cơ bản</label> <input type="text"
-												class="form-control" placeholder="Nhập thông tin" value="${car.basic_infor}"
-												name="basic_infor" required>
+												class="form-control" placeholder="Nhập thông tin"
+												value="${car.basic_infor}" name="basic_infor" required>
+										</div>
+									</div>
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label>Trạng thái</label> 
+											<select class="form-control" required
+												name="status" id="status">
+												<option value="${car.status}" selected>${car.status}</option>
+												<option value="Activated">Activated</option>
+												<option value="Canceled">Canceled</option>
+											</select>
 										</div>
 									</div>
 								</div>

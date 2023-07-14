@@ -19,22 +19,30 @@
 			<%@ include file="/partial/header.jsp"%>
 			<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
 				<div class="row bg-light"
-					style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding-right: 40px;">
+					style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto;">
 					<div class="col-sm-12">
 						<header class="text-center py-3 rounded ">
 							<h1 class="display-5 font-weight-bold text-secondary text-center">Sign
 								in</h1>
 						</header>
 						<form action="${pageContext.request.contextPath}/checkLogin"
-							method="post">
-							<div class="form-group">
-								<label class="text-dark">Email</label> <input type="text"
-									class="form-control" name="email" placeholder="Enter email">
+							method="POST">
+							<div class="row">
+								<div class="form-group col-md-12">
+									<label class="text-dark ">Email</label> <input type="text"
+										class="form-control" name="email" placeholder="Enter Email"
+										id="email" value="">
+								</div>
 							</div>
-							<div class="form-group">
-								<label class="text-dark">Password </label> <input
-									type="password" class="form-control" name="password"
-									placeholder="Enter password">
+							
+
+							<div class="row ">
+								<div class="form-group col-md-12">
+									<label class="text-dark ">Password</label> <input
+										type="password" class="form-control" name="password"
+										placeholder="Enter Password">
+								</div>
+
 							</div>
 
 							<c:if test='${not empty message}'>
@@ -48,13 +56,13 @@
 								</div>
 							</c:if>
 
-							<button type="submit" class="btn btn-primary">Login</button>
-							<a href="/login"><button type="reset"
-									class="btn btn-secondary">Cancel</button></a>
-							<p class="mt-3">
-								Don't have an account? <a
-									href="${pageContext.request.contextPath}/addUser">Sign up</a>
-							</p>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Login</button>
+								<button type="reset" class="btn btn-secondary">Cancel</button>
+								<p class="mt-3">
+									Don't have an account? <a href="./register">Sign up</a>
+								</p>
+							</div>
 						</form>
 					</div>
 				</div>

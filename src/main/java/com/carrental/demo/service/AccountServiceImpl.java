@@ -18,11 +18,6 @@ public class AccountServiceImpl implements AccountService{
     private  AccountRepository accountRepository;
 
     @Override
-    public void addAccount(Account account) {
-        accountRepository.insert(account);
-    }
-
-    @Override
     public boolean checkLogin(String email, String password, Model model) {
         String encryptedpassword = null;
         try
@@ -69,4 +64,48 @@ public class AccountServiceImpl implements AccountService{
         }
         return false;
     }
+    
+    @Override
+	public boolean checkRegister(String name, String email, String password, String confirmPassword, String phone,
+			String address, String tax_code, Model model) {
+		
+		Optional<Account> optionalUser = accountRepository.getAccountByEmail(email);
+		
+		
+		if(email.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter email"));
+		}
+		else if(password.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter password"));
+		}
+		else if(password.length() < 6) {
+			model.addAttribute("message", new Message("warning", "Please enter password at least 6 digits"));
+		}
+		else if(!(password.equals(confirmPassword))) {
+			model.addAttribute("message", new Message("warning", "Password is different from Confirm Password"));
+		}
+		else if(confirmPassword.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter confirm password"));
+		}
+		else if(name.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter fullname"));
+		}
+		else if(phone.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter phone number"));
+		}
+		else if(phone.length() != 10) {
+			model.addAttribute("message", new Message("warning", "Wrong type of phone number"));
+		}
+		else if(address.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter address"));
+		}
+		else if(optionalUser.isPresent()) {
+			model.addAttribute("message", new Message("warning", "Email is existed"));
+		}
+		else {
+			model.addAttribute("message", new Message("success", "Register successfully"));
+			return true;
+		}
+		return false;
+	}
 }

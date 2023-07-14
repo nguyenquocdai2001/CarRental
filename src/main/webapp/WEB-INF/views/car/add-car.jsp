@@ -31,7 +31,7 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên</label> <input type="text" class="form-control"
+											<label>Tên xe</label> <input type="text" class="form-control"
 												placeholder="Nhập tên xe" name="name" required>
 										</div>
 									</div>

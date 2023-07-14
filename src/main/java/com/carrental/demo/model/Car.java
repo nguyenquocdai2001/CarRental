@@ -17,6 +17,7 @@ public class Car {
 	private int number_of_seats;
 	private int kilometer;
 	private String basic_infor;
+	private String status;
 	
 	public Car(String name, String image, String brand, String license_plate, int number_of_seats,
 			int kilometer, String basic_infor) {
@@ -28,6 +29,7 @@ public class Car {
 		this.number_of_seats = number_of_seats;
 		this.kilometer = kilometer;
 		this.basic_infor = basic_infor;
+		this.status = "activated";
 	}
 
 	public String getId() {
@@ -92,6 +94,14 @@ public class Car {
 
 	public void setBasic_infor(String basic_infor) {
 		this.basic_infor = basic_infor;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

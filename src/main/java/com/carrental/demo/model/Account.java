@@ -12,10 +12,22 @@ public class Account {
     private String email;
     private String password;
     private String status;
+    private String role;
+    
+    public Account() {
+       super();
+    }
 
     public Account(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+    
+    public Account(String email, String password, String status, String role) {
+        this.email = email;
+        this.password = password;
+        this.status = status;
+        this.role = role;
     }
 
 	public String getId() {
@@ -49,5 +61,15 @@ public class Account {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	
     
 }
