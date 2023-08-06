@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.1.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.carrental</groupId>
 	<artifactId>demo</artifactId>
@@ -66,14 +67,15 @@
 			<version>${servlet.api.version}</version>
 		</dependency>
 
-<!--		&lt;!&ndash; jsp api &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>javax.servlet.jsp</groupId>-->
-<!--			<artifactId>javax.servlet.jsp-api</artifactId>-->
-<!--			<version>${jsp.api.version}</version>-->
-<!--		</dependency>-->
+		<!--		&lt;!&ndash; jsp api &ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>javax.servlet.jsp</groupId>-->
+		<!--			<artifactId>javax.servlet.jsp-api</artifactId>-->
+		<!--			<version>${jsp.api.version}</version>-->
+		<!--		</dependency>-->
 
-		<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
+		<!--
+		https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
 		<dependency>
 			<groupId>jakarta.servlet.jsp.jstl</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -81,14 +83,15 @@
 		</dependency>
 
 
-<!--		&lt;!&ndash; jstl &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>javax.servlet</groupId>-->
-<!--			<artifactId>jstl</artifactId>-->
-<!--			<version>${jstl.version}</version>-->
-<!--		</dependency>-->
+		<!--		&lt;!&ndash; jstl &ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>javax.servlet</groupId>-->
+		<!--			<artifactId>jstl</artifactId>-->
+		<!--			<version>${jstl.version}</version>-->
+		<!--		</dependency>-->
 
-		<!-- https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
+		<!--
+		https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -100,6 +103,15 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
+
+		<!--
+		https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>8.1.0</version>
+		</dependency>
+
 
 		<!-- sitemesh decorator -->
 		<dependency>

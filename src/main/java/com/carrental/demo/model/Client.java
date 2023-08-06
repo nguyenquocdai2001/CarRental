@@ -15,6 +15,7 @@ public class Client {
 	private String email;
 	private String address;
 	private String tax_code;
+	private String status;
 	
 	public Client(String id, String name, String phone, String email, String address, String tax_code) {
 		super();
@@ -24,6 +25,7 @@ public class Client {
 		this.email = email;
 		this.address = address;
 		this.tax_code = tax_code;
+		this.status = "Activated";
 	}
 	
 	public Client(String name, String phone, String email, String address, String tax_code) {
@@ -33,6 +35,7 @@ public class Client {
 		this.email = email;
 		this.address = address;
 		this.tax_code = tax_code;
+		this.status = "Activated";
 	}
 	
 	public Client() {
@@ -74,6 +77,14 @@ public class Client {
 	}
 	public void setTax_code(String tax_code) {
 		this.tax_code = tax_code;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

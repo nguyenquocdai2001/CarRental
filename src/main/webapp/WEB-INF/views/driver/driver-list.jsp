@@ -8,7 +8,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Danh sách xe</title>
+<title>Danh sách tài xế</title>
 <%@ include file="/link/link.jsp"%>
 
 </head>
@@ -23,37 +23,35 @@
 						<div class="col-md-12">
 							<div class="card card-plain table-plain-bg">
 								<div class="card-header ">
-									<h4 class="card-title">DANH SÁCH XE</h4>
-									<p class="card-category">List of cars</p>
-									<a class="btn" href="${pageContext.request.contextPath}/add-car">Thêm xe</a>
+									<h4 class="card-title">DANH SÁCH TÀI XÊ</h4>
+									<p class="card-category">List of drivers</p>
+									<a class="btn" href="${pageContext.request.contextPath}/add-driver">Thêm tài xế</a>
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table class="table table-hover" id="car">
+									<table class="table table-hover" id="driver">
 										<thead>
-											<th>Tên xe</th>
-											<th>Loại xe</th>
-											<th>Biển số	</th>
-											<th>Số ghế</th>
-											<th>Số km</th>	
+											<th>Tên tài xế</th>
+											<th>Tuổi</th>
+											<th>Địa chỉ</th>
+											<th>Số điện thoại</th>
 											<th>Ảnh</th>
 											<th>Thông tin</th>
 											<th>Trạng thái</th>
 											<th>Detail</th>
 										</thead>
 										<tbody>
-											<c:forEach var="car" items="${listCar}" varStatus="loop">
+											<c:forEach var="driver" items="${listDriver}" varStatus="loop">
 												<tr>
 													
-														<td>${car.name}</td>
-														<td>${car.brand}</td>
-														<td>${car.license_plate}</td>
-														<td>${car.number_of_seats}</td>
-														<td>${car.kilometer}</td>
+														<td>${driver.name}</td>
+														<td>${driver.age}</td>
+														<td>${driver.address}</td>
+														<td>${driver.phone}</td>
 														<td><img class="img" height="60px" width="60px"
 														src="${pageContext.request.contextPath}/template/admin/upload/
 													<c:choose>
-														<c:when test="${car.image ne null}">
-															${car.image}		
+														<c:when test="${driver.image ne null}">
+															${driver.image}		
 														</c:when>
 														<c:otherwise>
 															springmvc.png
@@ -61,9 +59,9 @@
 													</c:choose>
 												" />
 													</td>
-														<td>${car.basic_infor}</td>
-														<td>${car.status}</td>
-														<td><a href="${pageContext.request.contextPath}/edit-car/${car.id}">Edit</a></td>
+														<td>${driver.infor}</td>
+														<td>${driver.status}</td>
+														<td><a href="${pageContext.request.contextPath}/edit-driver/${driver.id}">Edit</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>

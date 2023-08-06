@@ -47,9 +47,12 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Loại xe</label> <input type="text"
-												class="form-control" placeholder="Nhập loại xe"
-												value="${car.brand}" name="brand" required>
+											<label>Loại xe</label> <select class="form-control" required
+												name="brand" id="brand">
+												<option value="${car.brand}" selected>${car.brand}</option>
+												<option value="Số sàn">Số sàn</option>
+												<option value="Số tự động">Số tự động</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -69,9 +72,9 @@
 												value="${car.kilometer}" name="kilometer" required>
 										</div>
 									</div>
-									<div class="col-md-4 px-1">
+									<div class="col-md-6 px-1">
 										<div class="form-group">
-											<label for="file">Image</label> <input type="hidden"
+											<label for="file">Hình ảnh</label> <input type="hidden"
 												name="image" value="${car.image}" /> <input
 												class="form-control" type="file" id="file" name="file"
 												value="${pageContext.request.contextPath}/template/admin/upload/${car.image}" />
@@ -90,9 +93,8 @@
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Trạng thái</label> 
-											<select class="form-control" required
-												name="status" id="status">
+											<label>Trạng thái</label> <select class="form-control"
+												required name="status" id="status">
 												<option value="${car.status}" selected>${car.status}</option>
 												<option value="Activated">Activated</option>
 												<option value="Canceled">Canceled</option>

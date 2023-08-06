@@ -17,7 +17,7 @@ public class Car {
 	private int number_of_seats;
 	private int kilometer;
 	private String basic_infor;
-	private String status;
+	private String status = "Activated";
 	
 	public Car(String name, String image, String brand, String license_plate, int number_of_seats,
 			int kilometer, String basic_infor) {
@@ -29,7 +29,12 @@ public class Car {
 		this.number_of_seats = number_of_seats;
 		this.kilometer = kilometer;
 		this.basic_infor = basic_infor;
-		this.status = "activated";
+		this.status = "Activated";
+	}
+	
+	public Car() {
+		super();
+		
 	}
 
 	public String getId() {

@@ -1,24 +1,36 @@
 package com.carrental.demo.service;
 
 import com.carrental.demo.model.Account;
-import com.carrental.demo.repository.AccountRepository;
+import com.carrental.demo.model.Client;
+
+import com.carrental.demo.repository.AccountRepositoryImpl;
 import com.carrental.demo.validator.Message;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.Query;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.firebase.cloud.FirestoreClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService{
-
+    
     @Autowired
-    private  AccountRepository accountRepository;
+    private  AccountRepositoryImpl accountRepositoryImpl;
 
     @Override
-    public boolean checkLogin(String email, String password, Model model) {
+    public boolean checkLogin(String email, String password, Model model) throws ExecutionException, InterruptedException {
         String encryptedpassword = null;
         try
         {
@@ -46,7 +58,7 @@ public class AccountServiceImpl implements AccountService{
             e.printStackTrace();
         }
         // TODO Auto-generated method stub
-        Optional<Account> optionalUser = accountRepository.getAccountByEmail(email);
+        Optional<Account> optionalUser = accountRepositoryImpl.getAccountByEmail(email);
         if(email.length() < 1) {
             model.addAttribute("message", new Message("warning", "Please enter email"));
         }
@@ -57,6 +69,7 @@ public class AccountServiceImpl implements AccountService{
             model.addAttribute("message", new Message("warning", "Email or Password is not correct"));
         }
         else if(!(optionalUser.isPresent())) {
+        	System.out.println(email);
             model.addAttribute("message", new Message("warning", "Email is not exist"));
         }
         if(optionalUser.isPresent() && optionalUser.get().getPassword().equals(encryptedpassword)) {
@@ -67,9 +80,9 @@ public class AccountServiceImpl implements AccountService{
     
     @Override
 	public boolean checkRegister(String name, String email, String password, String confirmPassword, String phone,
-			String address, String tax_code, Model model) {
+			String address, String tax_code, Model model) throws ExecutionException, InterruptedException {
 		
-		Optional<Account> optionalUser = accountRepository.getAccountByEmail(email);
+		Optional<Account> optionalUser = accountRepositoryImpl.getAccountByEmail(email);
 		
 		
 		if(email.length() < 1) {
@@ -108,4 +121,6 @@ public class AccountServiceImpl implements AccountService{
 		}
 		return false;
 	}
+
+	
 }

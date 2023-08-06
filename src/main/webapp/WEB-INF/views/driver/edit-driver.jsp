@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Thêm xe</title>
+<title>Chỉnh sửa tài xế</title>
 <%@ include file="/link/link.jsp"%>
 </head>
 <body>
@@ -22,73 +22,74 @@
 						<div class="col-md-8">
 
 
-							<h4 class="card-title">Thêm xe</h4>
+							<h4 class="card-title">Chỉnh sửa tài xế</h4>
 
 
 							<form method="POST"
-								action="${pageContext.request.contextPath}/add-car-post"
+								action="${pageContext.request.contextPath}/edit-driver/${driver.id}/edit"
 								enctype="multipart/form-data">
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên xe</label> <input type="text" class="form-control"
-												placeholder="Nhập tên xe" name="name" required>
+											<label>Tên tài xế</label> <input type="text"
+												class="form-control" value="${driver.name}"
+												placeholder="Nhập tên tài xế" name="name" required>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Biển số</label> <input type="text"
-												class="form-control" placeholder="Nhập biển số"
-												name="license_plate" required>
+											<label>Tuổi</label> <input type="number" class="form-control"
+												placeholder="Nhập tuổi" value="${driver.age}" name="age"
+												required>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Loại xe</label> 
-											<select class="form-control" required
-												name="brand" id="brand">
-												<option value="" selected>Chọn loại xe</option>
-												<option value="Số sàn">Số sàn</option>
-												<option value="Số tự động">Số tự động</option>
+											<label>Địa chỉ</label> <input type="text"
+												class="form-control" placeholder="Nhập địa chỉ"
+												name="address" value="${driver.address}" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Số điện thoại</label> <input type="number"
+												class="form-control" placeholder="Nhập số điện thoại"
+												value="${driver.phone}" name="phone" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label>Trạng thái</label> <select class="form-control"
+												required name="status" id="status">
+												<option value="${driver.status}" selected>${driver.status}</option>
+												<option value="Activated">Activated</option>
+												<option value="Canceled">Canceled</option>
 											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Số ghế</label> <input type="number"
-												class="form-control" placeholder="Nhập số ghế"
-												name="number_of_seats" required>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 pr-1">
-										<div class="form-group">
-											<label>Số km đã đi</label> <input type="number"
-												class="form-control" placeholder="Nhập số km"
-												name="kilometer" required>
 										</div>
 									</div>
 									<div class="col-md-6 px-1">
 										<div class="form-group">
-											<label for="file">Hình ảnh</label> <input class="form-control"
-												type="file" id="file" name="file" required />
+											<label for="file">Hình ảnh</label> <input type="hidden"
+												name="image" value="${driver.image}" /> <input
+												class="form-control" type="file" id="file" name="file"
+												value="${pageContext.request.contextPath}/template/admin/upload/${driver.image}" />
 										</div>
 									</div>
-
 								</div>
-
 								<div class="row">
 									<div class="col-md-12 pr-1">
 										<div class="form-group">
 											<label>Thông tin cơ bản</label> <input type="text"
 												class="form-control" placeholder="Nhập thông tin"
-												name="basic_infor" required>
+												value="${driver.infor}" name="infor" required>
 										</div>
 									</div>
 								</div>
+
 
 								<input type="submit" class="btn btn-info btn-fill pull-right">
 								<div class="clearfix"></div>

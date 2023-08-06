@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Thêm xe</title>
+<title>Chỉnh sửa khách hàng</title>
 <%@ include file="/link/link.jsp"%>
 </head>
 <body>
@@ -22,73 +22,67 @@
 						<div class="col-md-8">
 
 
-							<h4 class="card-title">Thêm xe</h4>
+							<h4 class="card-title">Chỉnh sửa khách hàng</h4>
 
 
 							<form method="POST"
-								action="${pageContext.request.contextPath}/add-car-post"
+								action="${pageContext.request.contextPath}/edit-client/${client.id}/edit"
 								enctype="multipart/form-data">
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên xe</label> <input type="text" class="form-control"
-												placeholder="Nhập tên xe" name="name" required>
+											<label>Tên khách hàng</label> <input type="text"
+												class="form-control" value="${client.name}"
+												placeholder="" name="name" readonly>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Biển số</label> <input type="text"
-												class="form-control" placeholder="Nhập biển số"
-												name="license_plate" required>
+											<label>Email</label> <input type="text" class="form-control"
+												placeholder="" value="${client.email}" name="email"
+												readonly>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Loại xe</label> 
-											<select class="form-control" required
-												name="brand" id="brand">
-												<option value="" selected>Chọn loại xe</option>
-												<option value="Số sàn">Số sàn</option>
-												<option value="Số tự động">Số tự động</option>
+											<label>Địa chỉ</label> <input type="text"
+												class="form-control" placeholder=""
+												name="address" value="${client.address}" readonly>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Số điện thoại</label> <input type="number"
+												class="form-control" placeholder=""
+												value="${client.phone}" name="phone" readonly>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label>Trạng thái</label> <select class="form-control"
+												required name="status" id="status">
+												<option value="${client.status}" selected>${client.status}</option>
+												<option value="Activated">Activated</option>
+												<option value="Canceled">Canceled</option>
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Số ghế</label> <input type="number"
-												class="form-control" placeholder="Nhập số ghế"
-												name="number_of_seats" required>
-										</div>
-									</div>
-								</div>
-								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Số km đã đi</label> <input type="number"
-												class="form-control" placeholder="Nhập số km"
-												name="kilometer" required>
-										</div>
-									</div>
-									<div class="col-md-6 px-1">
-										<div class="form-group">
-											<label for="file">Hình ảnh</label> <input class="form-control"
-												type="file" id="file" name="file" required />
-										</div>
-									</div>
-
-								</div>
-
-								<div class="row">
-									<div class="col-md-12 pr-1">
-										<div class="form-group">
-											<label>Thông tin cơ bản</label> <input type="text"
-												class="form-control" placeholder="Nhập thông tin"
-												name="basic_infor" required>
+											<label>Mã số thuế</label> <input type="number"
+												class="form-control" placeholder=""
+												value="${client.tax_code}" name="tax_code" readonly>
 										</div>
 									</div>
 								</div>
+								
+									
+								
+
 
 								<input type="submit" class="btn btn-info btn-fill pull-right">
 								<div class="clearfix"></div>

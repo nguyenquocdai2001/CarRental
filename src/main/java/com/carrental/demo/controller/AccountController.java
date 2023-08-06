@@ -2,20 +2,28 @@ package com.carrental.demo.controller;
 
 import com.carrental.demo.model.Account;
 import com.carrental.demo.model.Client;
-import com.carrental.demo.repository.AccountRepository;
-import com.carrental.demo.repository.ClientRepository;
+
+
+import com.carrental.demo.repository.AccountRepositoryImpl;
+
+import com.carrental.demo.repository.ClientRepositoryImpl;
 import com.carrental.demo.service.AccountService;
 
 import jakarta.servlet.http.HttpSession;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @Controller
@@ -25,10 +33,13 @@ public class AccountController {
     private AccountService accountService;
     
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountRepositoryImpl accountRepositoryImpl;
     
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientRepositoryImpl clientRepositoryImpl;
+    
+
+    
 
     @GetMapping("homepage")
     public String homepage(){
@@ -44,13 +55,55 @@ public class AccountController {
     public String loginPage(){
         return "login";
     }
+    
+    @RequestMapping(value = "/list-client", method = RequestMethod.GET)
+	public String listClient(Model model, HttpSession session) throws ExecutionException, InterruptedException {
+		if (session.getAttribute("userSession") != null) {
+			Account loggedInUser = (Account) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				List<Client> listClient = new ArrayList<Client>();
+				listClient = clientRepositoryImpl.getAllClientsExceptOneByEmail("trungnghesi111@gmail.com");
+
+				model.addAttribute("listClient", listClient);
+				return "client/client-list";
+				
+			} else {
+				return "redirect:/clientpage";
+			}
+		}
+		return "./login";	
+	}
+    
+    @GetMapping("/edit-client/{id}")
+	public String showEditForm(@PathVariable("id") String idClient, Model model, HttpSession session) throws ExecutionException, InterruptedException {
+		if (session.getAttribute("userSession") != null) {
+			Account loggedInUser = (Account) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				Client client = clientRepositoryImpl.getClientyId(idClient);
+				
+				// Đưa xe vào model để hiển thị trong biểu mẫu
+				model.addAttribute("client", client);	
+				return "./client/edit-client";
+				
+			} else {
+				return "redirect:/clientpage";
+			}
+		}
+		return "./login";
+	}
+	
+	@PostMapping("/edit-client/{id}/edit")
+	public String editClient(@ModelAttribute("client") Client client) throws InterruptedException, ExecutionException {
+		clientRepositoryImpl.saveClient(client);
+		return "redirect:/list-client";
+	}
 
     @PostMapping("/checkLogin")
     public String checkLogin(Model model, @RequestParam("email") String email,
-                             @RequestParam("password") String password, @ModelAttribute("account") Account account, HttpSession session){
+                             @RequestParam("password") String password, @ModelAttribute("account") Account account, HttpSession session) throws ExecutionException, InterruptedException{
         if(accountService.checkLogin(email, password, model)){
-        	Optional<Account> acc = accountRepository.getAccountByEmail(email);
-        	Optional<Client> client = clientRepository.getClientByEmail(email);
+        	Optional<Account> acc = accountRepositoryImpl.getAccountByEmail(email);
+        	Optional<Client> client = clientRepositoryImpl.getClientByEmail(email);
         	
 
 			System.out.println("login thanh cong");
@@ -67,8 +120,7 @@ public class AccountController {
         	if(acc.get().getRole().equals("client")) {
         		return "redirect:/clientpage";
         	}
-            System.out.println("login thanh cong");
-            return "redirect:/homepage";
+            return "redirect:/list-client";
         }else {
         	System.out.println("login that bai");
         }
@@ -87,8 +139,8 @@ public class AccountController {
 			@RequestParam(required = false, name = "email") String email,
 			@RequestParam(required = false, name = "phone") String phone,
 			@RequestParam(required = false, name = "address") String address,
-			@RequestParam(required = false, name = "tax_code") String tax_code, Model model) {
-
+			@RequestParam(required = false, name = "tax_code") String tax_code, Model model) throws InterruptedException, ExecutionException {
+		String uniqueID = UUID.randomUUID().toString();
 		String encryptedpassword = null;
 		try {
 			/* MessageDigest instance for MD5. */
@@ -117,16 +169,16 @@ public class AccountController {
 
 		if (accountService.checkRegister(name, email, password, confirmPassword, phone, address, tax_code, model)) {
 			System.out.println("Register thanh cong");
-			Account acc = new Account(email, encryptedpassword, "activated", "client");
-			Client client = new Client(name, phone, email, address, tax_code);
-			accountRepository.insert(acc);
-			clientRepository.insert(client);
+			Account acc = new Account(uniqueID, email, encryptedpassword, "Activated", "client");
+			Client client = new Client(uniqueID, name, phone, email, address, tax_code);
+			accountRepositoryImpl.saveAccount(acc);
+			clientRepositoryImpl.saveClient(client);
 			model.addAttribute("ACC", acc);
 			model.addAttribute("CLIENT", client);
 			return "register";
 		} else {
 			model.addAttribute("valid", "is-invalid");
-			model.addAttribute("check", new Account(email, password,"activated", "client"));
+			model.addAttribute("check", new Account(uniqueID, email, password,"Activated", "client"));
 			model.addAttribute("check2", new Client(name, phone, email, address, tax_code));
 			System.out.println("Register that bai");
 		}

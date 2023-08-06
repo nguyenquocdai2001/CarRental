@@ -8,7 +8,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Danh sách đơn đặt trước</title>
+<title>Danh sách hợp đồng</title>
 <%@ include file="/link/link.jsp"%>
 
 </head>
@@ -23,19 +23,17 @@
 						<div class="col-md-12">
 							<div class="card card-plain table-plain-bg">
 								<div class="card-header ">
-									<h4 class="card-title">DANH SÁCH ĐƠN ĐẶT TRƯỚC</h4>
-									<p class="card-category">List of pre-orders</p>
-									<a class="btn"
-										href="${pageContext.request.contextPath}/add-preOrder">Thêm
-										đơn</a>
+									<h4 class="card-title">DANH SÁCH HỢP ĐỒNG</h4>
+									<p class="card-category">List of contracts</p>
+
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table class="table table-hover" id="pre">
+									<table class="table table-hover" id="contract">
 										<thead>
 											<th>Tên khách hàng</th>
 											<th>SĐT</th>
 											<th>Điểm đón</th>
-
+											<th>Điểm trả</th>
 											<th>Tuyến đường</th>
 											<th>Ngày giờ đi</th>
 											<th>Ngày giờ về</th>
@@ -44,32 +42,29 @@
 											<th>Detail</th>
 										</thead>
 										<tbody>
-											<c:forEach var="pre" items="${listpreOrder}" varStatus="loop">
+											<c:forEach var="con" items="${listContract}" varStatus="loop">
 												<tr>
 
-													<td>${pre.name_client}</td>
-													<td>${pre.phone_client}</td>
-													<td>${pre.pick_up_at}</td>
-													<td>${pre.route}</td>
-													<td>${pre.date_going}-${pre.time_going}</td>
-													<td>${pre.date_comback}-${pre.time_comback}</td>
-													<td>${pre.total_price}</td>
-													<td>${pre.status}</td>
-													<td><c:if test="${pre.status == 'Đã xong'}">
+													<td>${con.name_client}</td>
+													<td>${con.phone}</td>
+													<td>${con.pick_up_at}</td>
+													<td>${con.comback_at}</td>
+													<td>${con.route}</td>
+													<td>${con.date_going}-${con.time_going}</td>
+													<td>${con.date_comback}-${con.time_comback}</td>
+													<td>${con.total_price}</td>
+													<td>${con.status}</td>
+													<td><c:if test="${con.status == 'Hết hiệu lực'}">
 															<a
-																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
-														</c:if> 
-														<c:if test="${pre.status == 'Hủy đơn'}">
+																href="${pageContext.request.contextPath}/details-contract/${con.id}">Details</a>
+														</c:if> <c:if test="${con.status == 'Còn hiệu lực'}">
 															<a
-																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
-														</c:if>
-														<c:if test="${pre.status == 'Khởi tạo'}">
-															<a
-																href="${pageContext.request.contextPath}/edit-preOrder/${pre.id}">
+																href="${pageContext.request.contextPath}/edit-contract/${con.id}">
 																Edit</a>
 															<a
-																href="${pageContext.request.contextPath}/add-contract/${pre.id}">
-																| Add contract</a>
+																href="${pageContext.request.contextPath}/add-bill/${con.id}">
+																	|	Xuất hóa đơn</a>
+
 														</c:if></td>
 
 												</tr>

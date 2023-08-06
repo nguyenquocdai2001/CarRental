@@ -30,48 +30,37 @@
 										đơn</a>
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table class="table table-hover" id="pre">
+									<table class="table table-hover">
 										<thead>
 											<th>Tên khách hàng</th>
 											<th>SĐT</th>
 											<th>Điểm đón</th>
-
 											<th>Tuyến đường</th>
 											<th>Ngày giờ đi</th>
 											<th>Ngày giờ về</th>
 											<th>Thành tiền</th>
-											<th>Trạng thái</th>
 											<th>Detail</th>
 										</thead>
 										<tbody>
 											<c:forEach var="pre" items="${listpreOrder}" varStatus="loop">
 												<tr>
-
-													<td>${pre.name_client}</td>
-													<td>${pre.phone_client}</td>
-													<td>${pre.pick_up_at}</td>
-													<td>${pre.route}</td>
-													<td>${pre.date_going}-${pre.time_going}</td>
-													<td>${pre.date_comback}-${pre.time_comback}</td>
-													<td>${pre.total_price}</td>
-													<td>${pre.status}</td>
-													<td><c:if test="${pre.status == 'Đã xong'}">
-															<a
-																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
-														</c:if> 
-														<c:if test="${pre.status == 'Hủy đơn'}">
-															<a
-																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
-														</c:if>
-														<c:if test="${pre.status == 'Khởi tạo'}">
-															<a
-																href="${pageContext.request.contextPath}/edit-preOrder/${pre.id}">
-																Edit</a>
-															<a
-																href="${pageContext.request.contextPath}/add-contract/${pre.id}">
-																| Add contract</a>
-														</c:if></td>
-
+													<c:if test="${pre.status == 'Khởi tạo'}">
+														<td>${pre.name_client}</td>
+														<td>${pre.phone_client}</td>
+														<td>${pre.pick_up_at}</td>
+														<td>${pre.route}</td>
+														<td>${pre.date_going}- ${pre.time_going}</td>
+														<td>${pre.date_comback}- ${pre.time_comback}</td>
+														<td>${pre.total_price}</td>
+														<td><a
+															<c:if test="${pre.status != 'Đã xong'}">
+																<a
+																	href="${pageContext.request.contextPath}/edit-preOrder/${pre.id}">	Edit</a>
+																<a
+																	href="${pageContext.request.contextPath}/add-contract/${pre.id}">	|	Add
+																	contract</a>
+															</c:if></td>
+													</c:if>
 												</tr>
 											</c:forEach>
 										</tbody>

@@ -17,32 +17,43 @@
 		</div>
 
 		<ul class="nav">
-			<li class="active"><a href=""> <i class="pe-7s-graph"></i>
-					<p>Trang chủ</p>
-			</a></li>
-			<li><a href="${pageContext.request.contextPath}/list-car"> <i
-					class="pe-7s-user"></i>
-					<p>Xe</p>
-			</a></li>
-			<li><a href="table.html"> <i class="pe-7s-note2"></i>
-					<p>Table List</p>
-			</a></li>
-			<li><a href="typography.html"> <i class="pe-7s-news-paper"></i>
-					<p>Typography</p>
-			</a></li>
-			<li><a href="icons.html"> <i class="pe-7s-science"></i>
-					<p>Icons</p>
-			</a></li>
-			<li><a href="maps.html"> <i class="pe-7s-map-marker"></i>
-					<p>Maps</p>
-			</a></li>
-			<li><a href="notifications.html"> <i class="pe-7s-bell"></i>
-					<p>Notifications</p>
-			</a></li>
-			<li class="active-pro"><a href="upgrade.html"> <i
-					class="pe-7s-rocket"></i>
-					<p>Upgrade to PRO</p>
-			</a></li>
+			<c:set var="userRole" value="${userRole}" />
+
+			<c:if test="${userRole == 'admin'}">
+				<li class=""><a
+					href="${pageContext.request.contextPath}/list-client"> <i
+						class="pe-7s-graph"></i>
+						<p>Khách hàng</p>
+				</a></li>
+				<li><a href="${pageContext.request.contextPath}/list-car">
+						<i class="pe-7s-user"></i>
+						<p>Xe</p>
+				</a></li>
+				<li><a href="${pageContext.request.contextPath}/list-driver">
+						<i class="pe-7s-note2"></i>
+						<p>Tài xế</p>
+				</a></li>
+				<li><a href="${pageContext.request.contextPath}/list-preOrder">
+						<i class="pe-7s-news-paper"></i>
+						<p>Đơn đặt trước</p>
+				</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/list-preOrder-start">
+						<i class="pe-7s-science"></i>
+						<p>Đơn đặt trước (khởi tạo)</p>
+				</a></li>
+				<li><a href="${pageContext.request.contextPath}/list-contract">
+						<i class="pe-7s-news-paper"></i>
+						<p>Hợp đồng</p>
+				</a></li>
+				<li><a href="${pageContext.request.contextPath}/list-bill"> <i class="pe-7s-bell"></i>
+						<p>Hóa đơn</p>
+				</a></li>
+				<!-- <li class="active-pro"><a href="upgrade.html"> <i
+						class="pe-7s-rocket"></i>
+						<p>Upgrade to PRO</p>
+				</a></li> -->
+			</c:if>
 		</ul>
 	</div>
 </div>

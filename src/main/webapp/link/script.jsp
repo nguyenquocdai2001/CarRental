@@ -17,4 +17,27 @@
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="/assets/js/demo.js"></script>
 	
+	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#bill').DataTable();
+	});
+	$(document).ready(function() {
+		$('#driver').DataTable();
+	});
+	$(document).ready(function() {
+		$('#car').DataTable();
+	});
+	$(document).ready(function() {
+		$('#client').DataTable();
+	});
+	$(document).ready(function() {
+		$('#pre').DataTable();
+	});
+	$(document).ready(function() {
+		$('#contract').DataTable();
+	});
+</script>
+	
 	

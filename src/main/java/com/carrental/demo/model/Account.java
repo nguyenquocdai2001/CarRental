@@ -23,11 +23,13 @@ public class Account {
         this.password = password;
     }
     
-    public Account(String email, String password, String status, String role) {
-        this.email = email;
+    public Account(String id, String email, String password, String status, String role) {
+    	this.id = id;
+    	this.email = email;
         this.password = password;
         this.status = status;
         this.role = role;
+       
     }
 
 	public String getId() {
