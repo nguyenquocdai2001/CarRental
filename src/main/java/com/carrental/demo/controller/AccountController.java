@@ -113,7 +113,7 @@ public class AccountController {
 			session.setAttribute("USERNAME", email);
 			
 			// session này dùng cho hiển thị fullname của người dùng ở header
-			session.setAttribute("helloUser", client.get().getName());
+			//session.setAttribute("helloUser", client.get().getName());
 			
 			// session này dùng cho hiển thị các chức năng của người dùng admin hoặc client ở sidebars
 			session.setAttribute("userRole", acc.get().getRole());

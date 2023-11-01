@@ -24,12 +24,12 @@ public class PreOrder {
 	private String name_car_license_plate_brand_number_of_seats;
 	private String route;
 	private String name_driver;
-	private double total_price;
+	private String total_price;
 	private String status;
 	
 	public PreOrder(String id, String pick_up_at, String comback_at, String address, String time_pre_order, String date_going, String date_comback, String time_going, String time_comback, String id_client, String name_client,
 			String name_car_license_plate_brand_number_of_seats, String phone_client, String route, String name_driver,
-			double total_price, String status) {
+			String total_price, String status) {
 		super();
 		this.id = id;
 		this.pick_up_at = pick_up_at;
@@ -200,11 +200,11 @@ public class PreOrder {
 		this.name_driver = name_driver;
 	}
 
-	public double getTotal_price() {
+	public String getTotal_price() {
 		return total_price;
 	}
 
-	public void setTotal_price(double total_price) {
+	public void setTotal_price(String total_price) {
 		this.total_price = total_price;
 	}
 
