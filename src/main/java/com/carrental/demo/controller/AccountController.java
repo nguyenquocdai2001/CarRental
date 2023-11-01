@@ -63,8 +63,9 @@ public class AccountController {
 			if (loggedInUser.getRole().equals("admin")) {
 				List<Client> listClient = new ArrayList<Client>();
 				listClient = clientRepositoryImpl.getAllClientsExceptOneByEmail("trungnghesi111@gmail.com");
-
+				
 				model.addAttribute("listClient", listClient);
+				model.addAttribute("nameFunction", "Khách hàng");
 				return "client/client-list";
 				
 			} else {

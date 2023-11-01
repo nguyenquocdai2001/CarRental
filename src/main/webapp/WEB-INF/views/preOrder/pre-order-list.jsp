@@ -25,9 +25,9 @@
 								<div class="card-header ">
 									<h4 class="card-title">DANH SÁCH ĐƠN ĐẶT TRƯỚC</h4>
 									<p class="card-category">List of pre-orders</p>
-									<a class="btn"
+									<a class="btn bg-info"
 										href="${pageContext.request.contextPath}/add-preOrder">Thêm
-										đơn</a>
+										đơn</a> <br> <br>
 								</div>
 								<div class="card-body table-full-width table-responsive">
 									<table class="table table-hover" id="pre">
@@ -57,13 +57,14 @@
 													<td>${pre.status}</td>
 													<td><c:if test="${pre.status == 'Đã xong'}">
 															<a
-																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
-														</c:if> 
-														<c:if test="${pre.status == 'Hủy đơn'}">
+																href="${pageContext.request.contextPath}/edit-preOrder/${pre.id}">
+																Edit</a>
 															<a
 																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
-														</c:if>
-														<c:if test="${pre.status == 'Khởi tạo'}">
+														</c:if> <c:if test="${pre.status == 'Đã hủy'}">
+															<a
+																href="${pageContext.request.contextPath}/details-preOrder/${pre.id}">Details</a>
+														</c:if> <c:if test="${pre.status == 'Khởi tạo'}">
 															<a
 																href="${pageContext.request.contextPath}/edit-preOrder/${pre.id}">
 																Edit</a>

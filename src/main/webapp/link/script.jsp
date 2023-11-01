@@ -38,6 +38,12 @@
 	$(document).ready(function() {
 		$('#contract').DataTable();
 	});
+	$(document).ready(function() {
+		$('#driverPayOut').DataTable();
+	});
+	$(document).ready(function() {
+		$('#carPayOut').DataTable();
+	});
 </script>
 	
 	

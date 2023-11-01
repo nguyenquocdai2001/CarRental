@@ -19,7 +19,7 @@
 			<%@ include file="/partial/header.jsp"%>
 			<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
 				<div class="row bg-light"
-					style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto;">
+					style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: auto auto;">
 					<div class="col-sm-12">
 						<header class="text-center py-3 rounded ">
 							<h1 class="display-5 font-weight-bold text-secondary text-center">Sign

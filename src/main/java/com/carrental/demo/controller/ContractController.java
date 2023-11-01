@@ -1,5 +1,6 @@
 package com.carrental.demo.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.carrental.demo.model.Account;
 import com.carrental.demo.model.Car;
@@ -65,6 +67,7 @@ public class ContractController {
 
 				// Đưa đơn vào model để hiển thị trong biểu mẫu
 				model.addAttribute("preOrder", preOrder);
+				model.addAttribute("nameFunction", "Hợp đồng");
 				return "./contract/add-contract";
 
 			} else {
@@ -100,11 +103,13 @@ public class ContractController {
 				List<PreOrder> lisPreOrders = new ArrayList<PreOrder>();
 				lisPreOrders = preOrderRepositoryImpl.getAllPreOrders();
 				model.addAttribute("lisPreOrders", lisPreOrders);
+				
 
 				Contract con = contractRepositoryImpl.getContractById(id);
 
 				// Đưa hợp đồng vào model để hiển thị trong biểu mẫu
 				model.addAttribute("contract", con);
+				model.addAttribute("nameFunction", "Hợp đồng");
 				return "./contract/edit-contract";
 
 			} else {
@@ -115,11 +120,18 @@ public class ContractController {
 	}
 
 	@PostMapping("/edit-contract/{id}/edit")
-	public String editContract(@ModelAttribute("contract") Contract contract) {
+	public String editContract(@ModelAttribute("contract") Contract contract,  @RequestParam("file") MultipartFile file, @PathVariable("id") String id) throws IOException, ExecutionException, InterruptedException {
+		String nameFile = file.getOriginalFilename();
+		if(!(nameFile.isEmpty())) {
+			contractRepositoryImpl.uploadContractImage(file, id);
+			contract.setImage("https://firebasestorage.googleapis.com/v0/b/thyan-b9327.appspot.com/o/contract%2F"  + id  + "?alt=media");
+		}else
+		{
+			contract.setImage(contract.getImage());
+		}
+		contract.setId(id);
 		contractRepositoryImpl.saveContract(contract);
-		//Chuyển status của hợp đồng thành "Hết hiệu lực"
-		//preOrderRepositoryImpl.editStatusPreOrderById(contract.getId(), "Hết hiệu lực");
-		return "redirect:/list-contract";
+		return "redirect:/edit-contract/{id}";
 	}
 	
 	@GetMapping("/details-contract/{id}")
@@ -131,6 +143,7 @@ public class ContractController {
 				
 				// Đưa đơn vào model để hiển thị trong biểu mẫu
 				model.addAttribute("contract", contract);	
+				model.addAttribute("nameFunction", "Hợp đồng");
 				return "./contract/details-contract";
 				
 			} else {
@@ -149,6 +162,7 @@ public class ContractController {
 				listContract = contractRepositoryImpl.getAllContracts();
 
 				model.addAttribute("listContract", listContract);
+				model.addAttribute("nameFunction", "Hợp đồng");
 				return "contract/list-contract";
 				
 			} else {

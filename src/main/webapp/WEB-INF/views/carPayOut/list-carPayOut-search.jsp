@@ -8,7 +8,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Danh sách xe</title>
+<title>Danh sách khoản chi xe</title>
+
 <%@ include file="/link/link.jsp"%>
 
 </head>
@@ -23,40 +24,29 @@
 						<div class="col-md-12">
 							<div class="card card-plain table-plain-bg">
 								<div class="card-header ">
-									<h4 class="card-title">DANH SÁCH XE</h4>
-									<p class="card-category">List of cars</p>
-									<a class="btn bg-info"
-										href="${pageContext.request.contextPath}/add-car">Thêm xe</a>
-									<br> <br>
+									<h4 class="card-title">DANH SÁCH KHOẢN CHI XE</h4>
+									<p class="card-category text-danger">Tổng chi: <c:out value="${totalCarPayOutSearch}" /></p>
+
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table class="table table-hover" id="car">
+									<table class="table table-hover " id="bill">
 										<thead>
 											<th>Tên xe</th>
-											<th>Loại xe</th>
-											<th>Biển số</th>
-											<th>Số ghế</th>
-											<th>Số km</th>
-											<th>Ảnh</th>
-											<th>Thông tin</th>
-											<th>Trạng thái</th>
+											<th>Ngày tạo</th>
+											<th>Số tiền</th>
+											<th>Lý do</th>
 											<th>Detail</th>
 										</thead>
 										<tbody>
-											<c:forEach var="car" items="${listCar}" varStatus="loop">
+											<c:forEach var="carPayOut" items="${listcarPayOutSearch}" varStatus="loop">
 												<tr>
 
-													<td>${car.name}</td>
-													<td>${car.brand}</td>
-													<td>${car.license_plate}</td>
-													<td>${car.number_of_seats}</td>
-													<td>${car.kilometer}</td>
-													<td><img class="img" height="60px" width="60px"
-														src="${car.image}" /></td>
-													<td>${car.basic_infor}</td>
-													<td>${car.status}</td>
-													<td><a
-														href="${pageContext.request.contextPath}/edit-car/${car.id}">Edit</a></td>
+													<td>${carPayOut.name_car}</td>
+														<td>${carPayOut.date}</td>
+														<td>${carPayOut.money}</td>
+														<td>${carPayOut.reason}</td>
+														<td><a href="${pageContext.request.contextPath}/edit-carPayOut/${carPayOut.id}">Edit</a></td>
+
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -68,7 +58,7 @@
 				</div>
 			</div>
 		</div>
-		<%@ include file="/partial/footer.jsp"%>
+
 	</div>
 </body>
 <%@ include file="/link/script.jsp"%>

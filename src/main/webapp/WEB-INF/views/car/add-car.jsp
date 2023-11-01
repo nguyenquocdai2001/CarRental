@@ -31,13 +31,13 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên xe</label> <input type="text" class="form-control"
+											<label>Tên xe*</label> <input type="text" class="form-control"
 												placeholder="Nhập tên xe" name="name" required>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Biển số</label> <input type="text"
+											<label>Biển số*</label> <input type="text"
 												class="form-control" placeholder="Nhập biển số"
 												name="license_plate" required>
 										</div>
@@ -46,18 +46,18 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Loại xe</label> 
+											<label>Loại xe*</label> 
 											<select class="form-control" required
 												name="brand" id="brand">
 												<option value="" selected>Chọn loại xe</option>
-												<option value="Số sàn">Số sàn</option>
-												<option value="Số tự động">Số tự động</option>
+												<option value="Dịch vụ">Dịch vụ</option>
+												<option value="Khách">Khách</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Số ghế</label> <input type="number"
+											<label>Số ghế*</label> <input type="number"
 												class="form-control" placeholder="Nhập số ghế"
 												name="number_of_seats" required>
 										</div>
@@ -66,14 +66,14 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Số km đã đi</label> <input type="number"
+											<label>Số km đã đi*</label> <input type="number"
 												class="form-control" placeholder="Nhập số km"
 												name="kilometer" required>
 										</div>
 									</div>
 									<div class="col-md-6 px-1">
 										<div class="form-group">
-											<label for="file">Hình ảnh</label> <input class="form-control"
+											<label for="file">Hình ảnh*</label> <input class="form-control"
 												type="file" id="file" name="file" required />
 										</div>
 									</div>
@@ -83,12 +83,13 @@
 								<div class="row">
 									<div class="col-md-12 pr-1">
 										<div class="form-group">
-											<label>Thông tin cơ bản</label> <input type="text"
+											<label>Thông tin cơ bản*</label> <input type="text"
 												class="form-control" placeholder="Nhập thông tin"
 												name="basic_infor" required>
 										</div>
 									</div>
 								</div>
+
 
 								<input type="submit" class="btn btn-info btn-fill pull-right">
 								<div class="clearfix"></div>

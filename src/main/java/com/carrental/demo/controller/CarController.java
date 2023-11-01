@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.carrental.demo.model.Account;
 import com.carrental.demo.model.Car;
 import com.carrental.demo.repository.CarRepositoryImpl;
-
+import com.carrental.demo.service.CarService;
 
 import org.springframework.ui.Model;
 import jakarta.servlet.ServletContext;
@@ -44,11 +44,13 @@ public class CarController {
 	@Autowired
 	private ServletContext servletContext;
 	
+	
 	@GetMapping("add-car")
     public String addCarForm(Model model, HttpSession session){
 		if (session.getAttribute("userSession") != null) {
 			Account loggedInUser = (Account) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
+				model.addAttribute("nameFunction", "Xe");
 				return "./car/add-car";
 				
 			} else {
@@ -59,15 +61,16 @@ public class CarController {
     }
 	
 	@PostMapping("add-car-post")
-	public String addCar(@ModelAttribute("car") Car car, @RequestParam("file") MultipartFile file) {
+	public String addCar(@ModelAttribute("car") Car car, @RequestParam("file") MultipartFile file) throws IOException, ExecutionException, InterruptedException {
 		String uniqueID = UUID.randomUUID().toString();
-		// Lưu file vào thư mục trong project
+		// Lưu file vào thư mục trong storage của firebase
 		String nameFile = file.getOriginalFilename();
-		saveImageInProject(file);
-		car.setImage(nameFile);
+		carRepositoryImpl.uploadCarImage(file, uniqueID);
+		
+		car.setImage("https://firebasestorage.googleapis.com/v0/b/thyan-b9327.appspot.com/o/car%2F" + uniqueID + "?alt=media");
 		car.setId(uniqueID);
 		carRepositoryImpl.saveCar(car);	
-		return "redirect:/add-car";
+		return "redirect:/list-car";
 	}
 	
 	@GetMapping("/edit-car/{id}")
@@ -79,6 +82,7 @@ public class CarController {
 				
 				// Đưa xe vào model để hiển thị trong biểu mẫu
 				model.addAttribute("car", car);	
+				model.addAttribute("nameFunction", "Xe");
 				return "./car/edit-car";
 				
 			} else {
@@ -89,17 +93,17 @@ public class CarController {
 	}
 	
 	@PostMapping("/edit-car/{id}/edit")
-	public String editDriver(@ModelAttribute("car") Car car, @RequestParam("file") MultipartFile file) {
+	public String editCar(@ModelAttribute("car") Car car, @RequestParam("file") MultipartFile file) throws IOException, ExecutionException, InterruptedException {
 		String nameFile = file.getOriginalFilename();
 		if(!(nameFile.isEmpty())) {
-			saveImageInProject(file);
-			car.setImage(nameFile);
+			carRepositoryImpl.uploadCarImage(file, car.getId());
+			car.setImage("https://firebasestorage.googleapis.com/v0/b/thyan-b9327.appspot.com/o/car%2F" + car.getId() + "?alt=media");
 		}else
 		{
 			car.setImage(car.getImage());
 		}
 		carRepositoryImpl.saveCar(car);
-		return "redirect:/list-car";
+		return "redirect:/edit-car/{id}";
 	}
 	
 	@RequestMapping(value = "/list-car", method = RequestMethod.GET)
@@ -109,8 +113,8 @@ public class CarController {
 			if (loggedInUser.getRole().equals("admin")) {
 				List<Car> listCar = new ArrayList<Car>();
 				listCar = carRepositoryImpl.getAllCars();
-
 				model.addAttribute("listCar", listCar);
+				model.addAttribute("nameFunction", "Xe");
 				return "car/car-list";
 				
 			} else {

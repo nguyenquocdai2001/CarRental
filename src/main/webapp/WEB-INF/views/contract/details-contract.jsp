@@ -30,16 +30,40 @@
 								enctype="multipart/form-data">
 
 								<div class="row">
-									<div class="col-md-12 pr-1">
+									<div class="col-md-6 pr-1">
 										<div class="form-group">
 											<label>ID hợp đồng</label> <input type="text"
 												class="form-control" value="${contract.id}" readonly
 												name="id">
 										</div>
 									</div>
+									
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label>ID đơn đặt trước</label> <input type="text"
+												class="form-control" value="${contract.id_pre_order}" readonly
+												name="id_pre_order">
+										</div>
+									</div>
+									
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label>ID khách hàng</label> <input type="text"
+												class="form-control" value="${contract.id_client}" readonly
+												name="id_client">
+										</div>
+									</div>
+									
+									<div class="col-md-6 pr-1">
+										<div class="form-group">
+											<label>Hình ảnh</label><a href="${contract.image}"> <input type="text"
+												class="form-control" value="${contract.image}" readonly
+												name="id"> </a>
+										</div>
+									</div>
 
 								</div>
-								<div class="row">
+								<%-- <div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
 											<label>Tên doanh nghiệp</label> <input type="text"
@@ -54,11 +78,11 @@
 												name="position_agency" readonly>
 										</div>
 									</div>
-								</div>
+								</div> --%>
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên khách hàng</label> <input type="text"
+											<label>Tên khách hàng (doanh nghiệp)</label> <input type="text"
 												class="form-control" value="${contract.name_client}"
 												name="name_client" readonly>
 										</div>
@@ -130,7 +154,7 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Ngày xuất phát</label> <input type="date" id=""
+											<label>Ngày xuất phát</label> <input type="text" id=""
 												class="form-control" placeholder="" name="date_going"
 												value="${contract.date_going}" readonly>
 										</div>
@@ -146,7 +170,7 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Ngày về</label> <input type="date" id=""
+											<label>Ngày về</label> <input type="text" id=""
 												class="form-control" placeholder="" name="date_comback"
 												value="${contract.date_comback}" readonly>
 										</div>

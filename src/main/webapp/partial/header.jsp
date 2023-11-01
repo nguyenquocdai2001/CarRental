@@ -8,7 +8,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/list-client">Dashboard</a>
+                    <a class="navbar-brand" href="">${nameFunction}</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -67,11 +67,18 @@
                                 <li><a href="#">Separated link</a></li>
                               </ul>
                         </li> -->
-                        <li>
-                            <a href="${pageContext.request.contextPath}/logout">
-                                <p>Log out</p>
-                            </a>
-                        </li>
+                        <c:if test="${userRole == 'admin'}">
+                         <li>
+	                            <a href="">
+	                                <p>${USERNAME}</p>
+	                            </a>
+	                        </li>
+	                        <li>
+	                            <a href="${pageContext.request.contextPath}/logout">
+	                                <p>Log out</p>
+	                            </a>
+	                        </li>
+                        </c:if>
 						<li class="separator hidden-lg"></li>
                     </ul>
                 </div>

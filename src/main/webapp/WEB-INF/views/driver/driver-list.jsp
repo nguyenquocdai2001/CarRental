@@ -25,7 +25,8 @@
 								<div class="card-header ">
 									<h4 class="card-title">DANH SÁCH TÀI XÊ</h4>
 									<p class="card-category">List of drivers</p>
-									<a class="btn" href="${pageContext.request.contextPath}/add-driver">Thêm tài xế</a>
+									<a class="btn bg-info" href="${pageContext.request.contextPath}/add-driver">Thêm tài xế</a>
+									<br> <br>
 								</div>
 								<div class="card-body table-full-width table-responsive">
 									<table class="table table-hover" id="driver">
@@ -48,16 +49,7 @@
 														<td>${driver.address}</td>
 														<td>${driver.phone}</td>
 														<td><img class="img" height="60px" width="60px"
-														src="${pageContext.request.contextPath}/template/admin/upload/
-													<c:choose>
-														<c:when test="${driver.image ne null}">
-															${driver.image}		
-														</c:when>
-														<c:otherwise>
-															springmvc.png
-														</c:otherwise>
-													</c:choose>
-												" />
+														src="${driver.image}"/>
 													</td>
 														<td>${driver.infor}</td>
 														<td>${driver.status}</td>

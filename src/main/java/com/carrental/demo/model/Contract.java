@@ -10,13 +10,12 @@ import lombok.Data;
 public class Contract {
 	@Id
 	private String id;
+	private String id_client;
 	private String id_pre_order;
 	private String name_driver;
 	private String name_car_license_plate_brand_number_of_seats;
 	private String name_client;
 	private String tax_code;
-	private String name_agency;
-	private String position_agency;
 	private String address;
 	private String phone;
 	private String route;
@@ -32,24 +31,24 @@ public class Contract {
 	private String date_comback;
 	private String time_going;
 	private String time_comback;
+	private String image;
+	private String id_car;
 	
 	public Contract() {
 		super();
 	}
 	
-	public Contract(String id, String id_pre_order, String name_driver, String date_going, String date_comback, String time_going, String time_comback,
-			String name_car_license_plate_brand_number_of_seats, String name_client, String tax_code,
-			String name_agency, String position_agency, String address, String phone, String route, String pick_up_at, String comback_at,
-			String total_price, String pre_paid_price, String another_fee, String indemnification, String list_customer, String status) {
+	public Contract(String id, String id_client, String id_pre_order, String name_driver, String date_going, String date_comback, String time_going, String time_comback,
+			String name_car_license_plate_brand_number_of_seats, String name_client, String tax_code, String address, String phone, String route, String pick_up_at, String comback_at,
+			String total_price, String pre_paid_price, String another_fee, String indemnification, String list_customer, String status, String image, String id_car) {
 		super();
 		this.id = id;
+		this.id_client = id_client;
 		this.id_pre_order = id_pre_order;
 		this.name_driver = name_driver;
 		this.name_car_license_plate_brand_number_of_seats = name_car_license_plate_brand_number_of_seats;
 		this.name_client = name_client;
 		this.tax_code = tax_code;
-		this.name_agency = name_agency;
-		this.position_agency = position_agency;
 		this.address = address;
 		this.phone = phone;
 		this.route = route;
@@ -65,6 +64,8 @@ public class Contract {
 		this.date_comback = date_comback;
 		this.time_going = time_going;
 		this.time_comback = time_comback;
+		this.image = image;
+		this.id_car = id_car;
 	}
 	
 	public String getId() {
@@ -103,18 +104,7 @@ public class Contract {
 	public void setTax_code(String tax_code) {
 		this.tax_code = tax_code;
 	}
-	public String getName_agency() {
-		return name_agency;
-	}
-	public void setName_agency(String name_agency) {
-		this.name_agency = name_agency;
-	}
-	public String getPosition_agency() {
-		return position_agency;
-	}
-	public void setPosition_agency(String position_agency) {
-		this.position_agency = position_agency;
-	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -218,6 +208,30 @@ public class Contract {
 
 	public void setTime_comback(String time_comback) {
 		this.time_comback = time_comback;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getId_client() {
+		return id_client;
+	}
+
+	public void setId_client(String id_client) {
+		this.id_client = id_client;
+	}
+
+	public String getId_car() {
+		return id_car;
+	}
+
+	public void setId_car(String id_car) {
+		this.id_car = id_car;
 	}
 	
 	

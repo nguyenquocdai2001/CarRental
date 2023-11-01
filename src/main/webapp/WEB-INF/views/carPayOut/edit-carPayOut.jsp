@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Thêm tài xế</title>
+<title>Chỉnh sửa khoản chi xe</title>
 <%@ include file="/link/link.jsp"%>
 </head>
 <body>
@@ -22,63 +22,59 @@
 						<div class="col-md-8">
 
 
-							<h4 class="card-title">Thêm tài xế</h4>
+							<h4 class="card-title">Chỉnh sửa khoản chi xe</h4>
 
 
 							<form method="POST"
-								action="${pageContext.request.contextPath}/add-driver-post"
+								action="${pageContext.request.contextPath}/edit-carPayOut/${carPayOut.id}/edit"
 								enctype="multipart/form-data">
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên tài xế*</label> <input type="text" class="form-control"
-												placeholder="Nhập tên tài xế" name="name" required>
-										</div>
-									</div>
-									<div class="col-md-6 pr-1">
-										<div class="form-group">
-											<label>Tuổi*</label> <input type="number"
-												class="form-control" placeholder="Nhập tuổi"
-												name="age" required>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Địa chỉ*</label> <input type="text"
-												class="form-control" placeholder="Nhập địa chỉ" name="address"
+											<label>Ngày tạo*</label> <input type="text" id=""
+												class="form-control" placeholder="" name="date" value="${carPayOut.date}"
 												required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Số điện thoại*</label> <input type="number"
-												class="form-control" placeholder="Nhập số điện thoại"
-												name="phone" required>
+											<label>Tên xe*</label> <select class="form-control"
+												required name="name_car" id="name_car">
+												<option value="${carPayOut.name_car}" selected>${carPayOut.name_car}</option>
+												<c:forEach var="car" items="${listCar}">
+													<c:choose>
+														<c:when test="${car.status == 'Activated'}">
+															<option value="${car.name}">${car.name}</option>
+														</c:when>
+													</c:choose>
+
+												</c:forEach>
+											</select>
 										</div>
 									</div>
 								</div>
+
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Thông tin cơ bản*</label> <input type="text"
-												class="form-control" placeholder="Nhập thông tin"
-												name="infor" required>
+											<label>Số tiền*</label> <input type="number"
+												class="form-control" placeholder="" value="${carPayOut.money}"
+												name="money" required>
 										</div>
 									</div>
-									<div class="col-md-6 px-1">
+									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label for="file">Hình ảnh*</label> <input class="form-control"
-												type="file" id="file" name="file" required />
+											<label>Lý do*</label> <input type="text"
+												class="form-control" placeholder="" value="${carPayOut.reason}"
+												name="reason" required>
 										</div>
 									</div>
-
 								</div>
-
 
 								<input type="submit" class="btn btn-info btn-fill pull-right">
 								<div class="clearfix"></div>
+
+
 							</form>
 
 						</div>

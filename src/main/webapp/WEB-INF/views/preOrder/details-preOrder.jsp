@@ -28,6 +28,16 @@
 							<form method="POST"
 								action=""
 								enctype="multipart/form-data">
+								
+								<div class="row">
+									<div class="col-md-12 pr-1">
+										<div class="form-group">
+											<label>ID Khách hàng</label> <input type="text" class="form-control"
+												value="${preOrder.id_client}" readonly name="id_client" readonly>
+										</div>
+									</div>
+									
+								</div>
 
 								<div class="row">
 									<div class="col-md-6 pr-1">

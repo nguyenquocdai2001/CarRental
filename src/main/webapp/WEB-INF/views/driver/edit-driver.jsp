@@ -31,14 +31,14 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên tài xế</label> <input type="text"
+											<label>Tên tài xế*</label> <input type="text"
 												class="form-control" value="${driver.name}"
 												placeholder="Nhập tên tài xế" name="name" required>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tuổi</label> <input type="number" class="form-control"
+											<label>Tuổi*</label> <input type="number" class="form-control"
 												placeholder="Nhập tuổi" value="${driver.age}" name="age"
 												required>
 										</div>
@@ -47,14 +47,14 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Địa chỉ</label> <input type="text"
+											<label>Địa chỉ*</label> <input type="text"
 												class="form-control" placeholder="Nhập địa chỉ"
 												name="address" value="${driver.address}" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Số điện thoại</label> <input type="number"
+											<label>Số điện thoại*</label> <input type="number"
 												class="form-control" placeholder="Nhập số điện thoại"
 												value="${driver.phone}" name="phone" required>
 										</div>
@@ -63,7 +63,7 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Trạng thái</label> <select class="form-control"
+											<label>Trạng thái*</label> <select class="form-control"
 												required name="status" id="status">
 												<option value="${driver.status}" selected>${driver.status}</option>
 												<option value="Activated">Activated</option>
@@ -73,7 +73,7 @@
 									</div>
 									<div class="col-md-6 px-1">
 										<div class="form-group">
-											<label for="file">Hình ảnh</label> <input type="hidden"
+											<label for="file">Hình ảnh*</label> <input type="hidden"
 												name="image" value="${driver.image}" /> <input
 												class="form-control" type="file" id="file" name="file"
 												value="${pageContext.request.contextPath}/template/admin/upload/${driver.image}" />
@@ -83,7 +83,7 @@
 								<div class="row">
 									<div class="col-md-12 pr-1">
 										<div class="form-group">
-											<label>Thông tin cơ bản</label> <input type="text"
+											<label>Thông tin cơ bản*</label> <input type="text"
 												class="form-control" placeholder="Nhập thông tin"
 												value="${driver.infor}" name="infor" required>
 										</div>

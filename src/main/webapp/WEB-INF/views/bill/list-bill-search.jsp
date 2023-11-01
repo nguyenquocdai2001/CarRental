@@ -25,11 +25,7 @@
 							<div class="card card-plain table-plain-bg">
 								<div class="card-header ">
 									<h4 class="card-title">DANH SÁCH HÓA ĐƠN</h4>
-									<p class="card-category text-danger">Tổng doanh thu: <c:out value="${totalPrice}" /></p>
-									<a class="btn bg-info"
-										href="${pageContext.request.contextPath}/search-bill">Doanh thu theo tháng</a>
-									<br> <br>
-									
+									<p class="card-category text-danger">Tổng doanh thu: <c:out value="${totalPriceSearch}" /></p>
 
 								</div>
 								<div class="card-body table-full-width table-responsive">
@@ -48,7 +44,7 @@
 											<th>Detail</th>
 										</thead>
 										<tbody>
-											<c:forEach var="bill" items="${listBill}" varStatus="loop">
+											<c:forEach var="bill" items="${listBillSearch}" varStatus="loop">
 												<tr>
 
 													<td>${bill.name_client}</td>

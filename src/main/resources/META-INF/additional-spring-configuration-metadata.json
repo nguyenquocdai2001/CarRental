@@ -8,5 +8,10 @@
     "name": "spring.data.mongo.database",
     "type": "java.lang.String",
     "description": "A description for 'spring.data.mongo.database'"
+  },
+  {
+    "name": "firebase.credentials.path",
+    "type": "java.lang.String",
+    "description": "A description for 'firebase.credentials.path'"
   }
 ]}

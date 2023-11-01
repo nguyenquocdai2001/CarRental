@@ -25,9 +25,10 @@
 								<div class="card-header ">
 									<h4 class="card-title">DANH SÁCH ĐƠN ĐẶT TRƯỚC</h4>
 									<p class="card-category">List of pre-orders</p>
-									<a class="btn"
+									<a class="btn bg-info"
 										href="${pageContext.request.contextPath}/add-preOrder">Thêm
 										đơn</a>
+										<br> <br>
 								</div>
 								<div class="card-body table-full-width table-responsive">
 									<table class="table table-hover">

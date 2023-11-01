@@ -1,10 +1,8 @@
 package com.carrental.demo.controller;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,8 +24,6 @@ import com.carrental.demo.model.Account;
 import com.carrental.demo.model.Driver;
 
 import com.carrental.demo.repository.DriverRepositoryImpl;
-
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -39,9 +35,6 @@ public class DriverController {
 	private DriverRepositoryImpl driverRepositoryImpl;
 	
 	
-	@Autowired
-	private ServletContext servletContext;
-	
 	@RequestMapping(value = "/list-driver", method = RequestMethod.GET)
 	public String listDriver(Model model, HttpSession session) throws ExecutionException, InterruptedException {
 		if (session.getAttribute("userSession") != null) {
@@ -51,6 +44,7 @@ public class DriverController {
 				listDriver = driverRepositoryImpl.getAllDrivers();
 
 				model.addAttribute("listDriver", listDriver);
+				model.addAttribute("nameFunction", "Tài xế");
 				return "driver/driver-list";
 				
 			} else {
@@ -65,6 +59,7 @@ public class DriverController {
 		if (session.getAttribute("userSession") != null) {
 			Account loggedInUser = (Account) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
+				model.addAttribute("nameFunction", "Tài xế");
 				return "./driver/add-driver";
 				
 			} else {
@@ -75,15 +70,15 @@ public class DriverController {
     }
 	
 	@PostMapping("add-driver-post")
-	public String addDriver(@ModelAttribute("driver") Driver driver, @RequestParam("file") MultipartFile file) {
+	public String addDriver(@ModelAttribute("driver") Driver driver, @RequestParam("file") MultipartFile file) throws IOException, ExecutionException, InterruptedException {
 		String uniqueID = UUID.randomUUID().toString();
-		// Lưu file vào thư mục trong project
+		// Lưu file vào storage
 		String nameFile = file.getOriginalFilename();
-		saveImageInProject(file);
-		driver.setImage(nameFile);
+		driverRepositoryImpl.uploadDriverImage(file, uniqueID);
+		driver.setImage("https://firebasestorage.googleapis.com/v0/b/thyan-b9327.appspot.com/o/driver%2F" + uniqueID + "?alt=media");
 		driver.setId(uniqueID);
 		driverRepositoryImpl.saveDriver(driver);
-		return "redirect:/add-driver";
+		return "redirect:/list-driver";
 	}
 	
 	@GetMapping("/edit-driver/{id}")
@@ -95,6 +90,7 @@ public class DriverController {
 				
 				// Đưa xe vào model để hiển thị trong biểu mẫu
 				model.addAttribute("driver", driver);	
+				model.addAttribute("nameFunction", "Tài xế");
 				return "./driver/edit-driver";
 				
 			} else {
@@ -105,32 +101,32 @@ public class DriverController {
 	}
 	
 	@PostMapping("/edit-driver/{id}/edit")
-	public String editDriver(@ModelAttribute("driver") Driver driver, @RequestParam("file") MultipartFile file) {
+	public String editDriver(@ModelAttribute("driver") Driver driver, @RequestParam("file") MultipartFile file) throws IOException, ExecutionException, InterruptedException {
 		String nameFile = file.getOriginalFilename();
 		if(!(nameFile.isEmpty())) {
-			saveImageInProject(file);
-			driver.setImage(nameFile);
+			driverRepositoryImpl.uploadDriverImage(file, driver.getId());
+			driver.setImage("https://firebasestorage.googleapis.com/v0/b/thyan-b9327.appspot.com/o/driver%2F" + driver.getId() + "?alt=media");
 		}else
 		{
 			driver.setImage(driver.getImage());
 		}
 		driverRepositoryImpl.saveDriver(driver);
-		return "redirect:/list-driver";
+		return "redirect:/edit-driver/{id}";
 	}
 	
-	private String saveImageInProject(MultipartFile file) {
-		// Lưu file vào thư mục trong project
-		String uploadDir = servletContext.getRealPath("/template/admin/upload/");
-		String fileName = file.getOriginalFilename();
-		String filePath = uploadDir + File.separator + fileName;
-		System.out.println(uploadDir);
-		try {
-			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath);	
-			Files.write(path, bytes);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return filePath;
-	}
+//	private String saveImageInProject(MultipartFile file) {
+//		// Lưu file vào thư mục trong project
+//		String uploadDir = servletContext.getRealPath("/template/admin/upload/");
+//		String fileName = file.getOriginalFilename();
+//		String filePath = uploadDir + File.separator + fileName;
+//		System.out.println(uploadDir);
+//		try {
+//			byte[] bytes = file.getBytes();
+//			Path path = Paths.get(filePath);	
+//			Files.write(path, bytes);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return filePath;
+//	}
 }

@@ -12,10 +12,10 @@ import lombok.Data;
 public class Bill {
 	@Id
 	private String id;
+	private String id_client;
 	private String id_contract;
 	private String name_client;
 	private String phone_client;
-	private String name_agency;
 	private String tax_code;
 	private String address;
 	private String payment;
@@ -28,20 +28,21 @@ public class Bill {
 	private String tax_money;
 	private String total_price;
 	private String date;
+	private String image;
 	
 	public Bill() {
 		super();
 	}
 	
-	public Bill(String id, String id_contrac, String name_client, String phone_client, String name_agency, String tax_code, String address, String payment,
+	public Bill(String id, String id_client, String id_contrac, String name_client, String phone_client, String tax_code, String address, String payment,
 			String bank_account_number, String name_service, String price_bf_discount, String discount,
-			String price_bf_tax, String tax_percent, String tax_money, String total_price, String date) {
+			String price_bf_tax, String tax_percent, String tax_money, String total_price, String date, String image) {
 		super();
 		this.id = id;
+		this.id_client = id_client;
 		this.id_contract = id_contrac;
 		this.name_client = name_client;
 		this.phone_client = phone_client;
-		this.name_agency = name_agency;
 		this.tax_code = tax_code;
 		this.address = address;
 		this.payment = payment;
@@ -54,6 +55,7 @@ public class Bill {
 		this.tax_money = tax_money;
 		this.total_price = total_price;
 		this.date = date;
+		this.image = image;
 	}
 
 	public String getId() {
@@ -89,14 +91,6 @@ public class Bill {
 
 	public void setPhone_client(String phone_client) {
 		this.phone_client = phone_client;
-	}
-
-	public String getName_agency() {
-		return name_agency;
-	}
-
-	public void setName_agency(String name_agency) {
-		this.name_agency = name_agency;
 	}
 
 	public String getTax_code() {
@@ -193,6 +187,22 @@ public class Bill {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getId_client() {
+		return id_client;
+	}
+
+	public void setId_client(String id_client) {
+		this.id_client = id_client;
 	}
 	
 	

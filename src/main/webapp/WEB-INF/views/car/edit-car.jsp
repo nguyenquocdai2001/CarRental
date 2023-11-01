@@ -31,14 +31,14 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Tên xe</label> <input type="text" class="form-control"
+											<label>Tên xe*</label> <input type="text" class="form-control"
 												value="${car.name}" placeholder="Nhập tên xe" name="name"
 												required>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Biển số</label> <input type="text"
+											<label>Biển số*</label> <input type="text"
 												class="form-control" placeholder="Nhập biển số"
 												value="${car.license_plate}" name="license_plate" required>
 										</div>
@@ -47,17 +47,17 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Loại xe</label> <select class="form-control" required
+											<label>Loại xe*</label> <select class="form-control" required
 												name="brand" id="brand">
 												<option value="${car.brand}" selected>${car.brand}</option>
-												<option value="Số sàn">Số sàn</option>
-												<option value="Số tự động">Số tự động</option>
+												<option value="Dịch vụ">Dịch vụ</option>
+												<option value="Khách">Khách</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Số ghế</label> <input type="number"
+											<label>Số ghế*</label> <input type="number"
 												class="form-control" placeholder="Nhập số ghế"
 												value="${car.number_of_seats}" name="number_of_seats"
 												required>
@@ -67,14 +67,14 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Số km đã đi</label> <input type="number"
+											<label>Số km đã đi*</label> <input type="number"
 												class="form-control" placeholder="Nhập số km"
 												value="${car.kilometer}" name="kilometer" required>
 										</div>
 									</div>
 									<div class="col-md-6 px-1">
 										<div class="form-group">
-											<label for="file">Hình ảnh</label> <input type="hidden"
+											<label for="file">Hình ảnh*</label> <input type="hidden"
 												name="image" value="${car.image}" /> <input
 												class="form-control" type="file" id="file" name="file"
 												value="${pageContext.request.contextPath}/template/admin/upload/${car.image}" />
@@ -86,14 +86,14 @@
 								<div class="row">
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Thông tin cơ bản</label> <input type="text"
+											<label>Thông tin cơ bản*</label> <input type="text"
 												class="form-control" placeholder="Nhập thông tin"
 												value="${car.basic_infor}" name="basic_infor" required>
 										</div>
 									</div>
 									<div class="col-md-6 pr-1">
 										<div class="form-group">
-											<label>Trạng thái</label> <select class="form-control"
+											<label>Trạng thái*</label> <select class="form-control"
 												required name="status" id="status">
 												<option value="${car.status}" selected>${car.status}</option>
 												<option value="Activated">Activated</option>

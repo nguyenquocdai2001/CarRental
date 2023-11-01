@@ -57,6 +57,7 @@ public class PreOrderController {
 				List<Driver> listDriver = new ArrayList<Driver>();
 				listDriver = driverRepositoryImpl.getAllDrivers();
 				model.addAttribute("listDriver", listDriver);
+				model.addAttribute("nameFunction", "Đơn đặt trước");
 				return "./preOrder/add-preOrder";
 				
 			} else {
@@ -71,9 +72,16 @@ public class PreOrderController {
 		String uniqueID = UUID.randomUUID().toString();
 
 		preOrder.setId(uniqueID);
+		preOrder.setDate_going(preOrderRepositoryImpl.formatDate(preOrder.getDate_going()));
+		preOrder.setDate_comback(preOrderRepositoryImpl.formatDate(preOrder.getDate_comback()));
 		preOrder.setTime_pre_order(java.time.LocalDateTime.now().toString());
+		 // Tách chuỗi theo dấu gạch ngang
+        String[] parts = preOrder.getName_car_license_plate_brand_number_of_seats().split(" - ");
+        // Lấy phần "name" (đầu tiên)
+        String name_car = parts[0];
+		preOrder.setId_car(preOrderRepositoryImpl.getIdCar(name_car));
 		preOrderRepositoryImpl.savePreOrder(preOrder);	
-		return "redirect:/add-preOrder";
+		return "redirect:/list-preOrder";
 	}
 	
 	@GetMapping("/edit-preOrder/{id}")
@@ -85,6 +93,15 @@ public class PreOrderController {
 				
 				// Đưa đơn vào model để hiển thị trong biểu mẫu
 				model.addAttribute("preOrder", preOrder);	
+				
+				List<Car> listCar = new ArrayList<Car>();
+				listCar = carRepositoryImpl.getAllCars();
+				model.addAttribute("listCar", listCar);
+				
+				List<Driver> listDriver = new ArrayList<Driver>();
+				listDriver = driverRepositoryImpl.getAllDrivers();
+				model.addAttribute("listDriver", listDriver);
+				model.addAttribute("nameFunction", "Đơn đặt trước");
 				return "./preOrder/edit-preOrder";
 				
 			} else {
@@ -97,7 +114,7 @@ public class PreOrderController {
 	@PostMapping("/edit-preOrder/{id}/edit")
 	public String editPreOrder(@ModelAttribute("preOrder") PreOrder preOrder) {
 		preOrderRepositoryImpl.savePreOrder(preOrder);
-		return "redirect:/list-preOrder";
+		return "redirect:/edit-preOrder/{id}";
 	}
 	
 	@GetMapping("/details-preOrder/{id}")
@@ -109,6 +126,7 @@ public class PreOrderController {
 				
 				// Đưa đơn vào model để hiển thị trong biểu mẫu
 				model.addAttribute("preOrder", preOrder);	
+				model.addAttribute("nameFunction", "Đơn đặt trước");
 				return "./preOrder/details-preOrder";
 				
 			} else {
@@ -127,6 +145,7 @@ public class PreOrderController {
 				listpreOrder = preOrderRepositoryImpl.getAllPreOrders();
 
 				model.addAttribute("listpreOrder", listpreOrder);
+				model.addAttribute("nameFunction", "Đơn đặt trước");
 				return "preOrder/pre-order-list";
 				
 			} else {
@@ -145,6 +164,7 @@ public class PreOrderController {
 				listpreOrder = preOrderRepositoryImpl.getAllPreOrders();
 
 				model.addAttribute("listpreOrder", listpreOrder);
+				model.addAttribute("nameFunction", "Đơn đặt trước");
 				return "preOrder/pre-order-list-start";
 				
 			} else {

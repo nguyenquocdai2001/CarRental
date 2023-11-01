@@ -21,6 +21,7 @@ public class PreOrder {
 	private String id_client;
 	private String name_client;
 	private String phone_client;
+	private String id_car;
 	private String name_car_license_plate_brand_number_of_seats;
 	private String route;
 	private String name_driver;
@@ -29,7 +30,7 @@ public class PreOrder {
 	
 	public PreOrder(String id, String pick_up_at, String comback_at, String address, String time_pre_order, String date_going, String date_comback, String time_going, String time_comback, String id_client, String name_client,
 			String name_car_license_plate_brand_number_of_seats, String phone_client, String route, String name_driver,
-			String total_price, String status) {
+			String total_price, String status, String id_car) {
 		super();
 		this.id = id;
 		this.pick_up_at = pick_up_at;
@@ -48,6 +49,7 @@ public class PreOrder {
 		this.name_driver = name_driver;
 		this.total_price = total_price;
 		this.status = status;
+		this.id_car = id_car;
 	}
 	
 
@@ -214,6 +216,16 @@ public class PreOrder {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+	public String getId_car() {
+		return id_car;
+	}
+
+
+	public void setId_car(String id_car) {
+		this.id_car = id_car;
 	}
 	
 	
